@@ -14,7 +14,8 @@ class UsersController extends Controller
      */
     public function index(): View
     {
-        return view('users.index');
+        $users = Users::all();
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -63,5 +64,23 @@ class UsersController extends Controller
     public function destroy(Users $users)
     {
         //
+    }
+
+    public function follow(Users $user)
+    {
+        if (!$this->auth()->user()->isFollowing($user->id)) {
+            $this->auth()->user()->following()->attach($user->id);
+        }
+
+        return back();
+    }
+
+    public function unfollow(Users $user)
+    {
+        if ($this->auth()->user()->isFollowing($user->id)) {
+            $this->auth()->user()->following()->detach($user->id);
+        }
+
+        return back();
     }
 }
