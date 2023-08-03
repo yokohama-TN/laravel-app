@@ -38,7 +38,7 @@ Route::resource('users', UsersController::class)
 ->only(['index'])
 ->middleware(['auth', 'verified']);
 
-Route::post('follow/{user}', 'UsersController@follow')->name('follow');
-Route::post('unfollow/{user}', 'UsersController@unfollow')->name('unfollow');
+Route::post('follow/{user}', [UsersController::class, 'follow'])->name('follow');
+Route::post('unfollow/{user}', [UsersController::class, 'unfollow'])->name('unfollow');
 
 require __DIR__ . '/auth.php';

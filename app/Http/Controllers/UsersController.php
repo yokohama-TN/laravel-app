@@ -68,8 +68,8 @@ class UsersController extends Controller
 
     public function follow(Users $user)
     {
-        if (!$this->auth()->user()->isFollowing($user->id)) {
-            $this->auth()->user()->following()->attach($user->id);
+        if (!auth()->user()->isFollowing($user->id)) {
+            auth()->user()->following()->attach($user->id);
         }
 
         return back();
@@ -77,8 +77,8 @@ class UsersController extends Controller
 
     public function unfollow(Users $user)
     {
-        if ($this->auth()->user()->isFollowing($user->id)) {
-            $this->auth()->user()->following()->detach($user->id);
+        if (auth()->user()->isFollowing($user->id)) {
+            auth()->user()->following()->detach($user->id);
         }
 
         return back();
