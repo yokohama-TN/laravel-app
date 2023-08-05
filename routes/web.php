@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\FollowsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,10 @@ Route::resource('chirps', ChirpController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('users', UsersController::class)
+->only(['index'])
+->middleware(['auth', 'verified']);
+
+Route::resource('follower', FollowsController::class)
 ->only(['index'])
 ->middleware(['auth', 'verified']);
 
