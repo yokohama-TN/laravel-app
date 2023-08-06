@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Follows;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FollowsController extends Controller
 {
@@ -13,7 +14,9 @@ class FollowsController extends Controller
      */
     public function index() : View
     {
-        return view('follower.index');
+        $user = Auth::user();
+        $user_id = $user->id;
+        return view('follower.index', compact('user_id'));
     }
 
     /**
