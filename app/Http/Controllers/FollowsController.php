@@ -16,7 +16,8 @@ class FollowsController extends Controller
     {
         $user = Auth::user();
         $user_id = $user->id;
-        return view('follower.index', compact('user_id'));
+        $followed_ids = Follows::where('follower_id', $user_id)->pluck('followed_id')->toArray();
+        return view('follower.index', compact('followed_ids'));
     }
 
     /**
